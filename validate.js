@@ -9,18 +9,17 @@ try {
   console.log('✅ Server build successful');
   console.log('📁 Server location:', serverPath);
   console.log('📊 Server size:', serverContent.length, 'characters');
-  
-  // Check for key components
+    // Check for key components
   const hasStdioTransport = serverContent.includes('StdioServerTransport');
   const hasServer = serverContent.includes('Server');
-  const hasPlannerTool = serverContent.includes('create_plan');
+  const hasArchitectureTool = serverContent.includes('architecture_consultation');
   
   console.log('🔧 Has stdio transport:', hasStdioTransport ? '✅' : '❌');
   console.log('🏗️ Has server setup:', hasServer ? '✅' : '✅');
-  console.log('🎯 Has planner tool:', hasPlannerTool ? '✅' : '❌');
+  console.log('🎯 Has architecture tool:', hasArchitectureTool ? '✅' : '❌');
   
-  if (hasStdioTransport && hasServer && hasPlannerTool) {
-    console.log('\n🎉 MCP Planner Server is ready!');
+  if (hasStdioTransport && hasServer && hasArchitectureTool) {
+    console.log('\n🎉 MCP Architecture Consultation Server is ready!');
     console.log('\n📋 To use with Claude Desktop:');
     console.log('1. Add server configuration to claude_desktop_config.json');
     console.log('2. Use absolute path:', serverPath);

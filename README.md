@@ -1,19 +1,19 @@
-# MCP Planner Server with Sampling
+# MCP Architecture Consultation Server with Sampling
 
-A Model Context Protocol (MCP) server that showcases the **MCP sampling feature** through an intelligent planner tool. This server demonstrates advanced planning capabilities by leveraging AI models to create comprehensive, actionable plans that break down complex objectives into structured steps with timelines, dependencies, and resource allocation.
+A Model Context Protocol (MCP) server that showcases the **MCP sampling feature** through an intelligent software architecture consultation tool. This server demonstrates advanced architecture guidance capabilities by leveraging AI models to provide expert-level software architecture advice, design patterns, and technical implementation strategies.
 
 ## Features
 
-🎯 **AI-Enhanced Planning Tool**: Create comprehensive, structured plans using MCP sampling for intelligent AI assistance
-🤖 **Real MCP Sampling**: Demonstrates actual MCP sampling capabilities with fallback to template-based planning
-📊 **Dual Planning Modes**: 
-   - **AI-Enhanced Mode**: Uses MCP sampling to request LLM completions for intelligent planning
-   - **Template Mode**: Falls back to structured template-based planning when sampling unavailable
-🔧 **TypeScript Implementation**: Built with TypeScript using the official MCP SDK
-✅ **Schema Validation**: Uses Zod for runtime type checking and validation
+�️ **AI-Enhanced Architecture Consultation Tool**: Get expert software architecture guidance using MCP sampling for intelligent AI assistance
+🤖 **Real MCP Sampling**: Demonstrates actual MCP sampling capabilities with fallback to structured error responses
+📊 **Dual Response Modes**: 
+   - **AI-Enhanced Mode**: Uses MCP sampling to request LLM completions for expert architecture guidance
+   - **Error Handling Mode**: Provides detailed error responses with troubleshooting guidance when sampling unavailable
+🔧 **JavaScript Implementation**: Built with JavaScript using the official MCP SDK
+✅ **Input Validation**: Includes input sanitization and security considerations
 🚀 **Stdio Transport**: Uses standard input/output for communication with MCP clients
-🛡️ **Graceful Fallbacks**: Automatically switches between AI and template modes based on availability
-📈 **Model Preferences**: Configures optimal model selection for planning tasks
+🛡️ **Graceful Fallbacks**: Automatically handles sampling failures with detailed error information
+📈 **Model Preferences**: Configures optimal model selection for architecture consultation tasks
 
 ## Installation
 
@@ -39,32 +39,30 @@ node src/index.js
 
 ### Available Tools
 
-#### `create_plan`
+#### `architecture_consultation`
 
-Creates a detailed, structured plan for achieving a specific goal. This tool demonstrates **real MCP sampling** by requesting AI completions when available, or falling back to template-based planning.
+Provides expert software architecture guidance and design solutions from a Senior Software Architect's perspective. This tool demonstrates **real MCP sampling** by requesting AI completions when available, or falling back to detailed error responses with troubleshooting guidance.
 
 **Sampling Features:**
-- 🤖 **AI-Enhanced Planning**: Uses LLM completions via MCP sampling for intelligent plan generation
-- 🎯 **Smart Model Selection**: Prefers models like Claude-3-Sonnet and GPT-4 for optimal planning
-- 📊 **Structured Prompting**: Constructs comprehensive prompts for consistent, actionable plans  
-- 🔄 **Graceful Fallback**: Automatically uses template-based planning if sampling unavailable
-- 📈 **Plan Metadata**: Tracks generation method and model information
+- 🏗️ **AI-Enhanced Architecture Guidance**: Uses LLM completions via MCP sampling for expert-level architecture consultation
+- 🎯 **Smart Model Selection**: Optimized for architecture-focused AI models for consistent, structured advice
+- 📊 **Comprehensive Prompting**: Constructs detailed prompts covering problem analysis, design patterns, and implementation strategies
+- 🔄 **Graceful Fallback**: Provides structured error responses with troubleshooting guidance if sampling unavailable
+- 📈 **Consultation Metadata**: Tracks generation method, model information, and analysis depth
 
 **Parameters:**
-- `goal` (required): The main objective or goal to create a plan for
-- `constraints` (optional): Array of constraints or limitations to consider
-- `timeframe` (optional): Time frame for the plan (e.g., '1 week', '3 months')
-- `resources` (optional): Array of available resources
-- `priority` (optional): Priority level ('low', 'medium', 'high')
+- `question` (required): The architecture or design question you need guidance on
+- `context` (optional): Additional context about your system, technology stack, or constraints
+- `domain` (optional): The domain or type of system architecture ('web', 'mobile', 'microservices', 'distributed', 'cloud', 'enterprise', 'embedded', 'data')
+- `complexity` (optional): The complexity level of the system or problem ('simple', 'moderate', 'complex', 'enterprise')
 
 **Example:**
 ```json
 {
-  "goal": "Launch a new mobile app",
-  "constraints": ["Limited budget", "3-person team"],
-  "timeframe": "6 months",
-  "resources": ["React Native expertise", "AWS cloud"],
-  "priority": "high"
+  "question": "How should I design a microservices architecture for a high-traffic e-commerce platform?",
+  "context": "Handling 100k+ users, Node.js backend, PostgreSQL database",
+  "domain": "microservices",
+  "complexity": "enterprise"
 }
 ```
 
@@ -74,50 +72,44 @@ This server demonstrates **real MCP sampling** as specified in the [MCP document
 
 ### Sampling Flow
 
-1. **Server Request**: When `create_plan` is called, the server attempts to use MCP sampling
+1. **Server Request**: When `architecture_consultation` is called, the server attempts to use MCP sampling
 2. **Client Review**: The MCP client (e.g., Claude Desktop) reviews the sampling request
 3. **LLM Completion**: The client samples from an available LLM (Claude, GPT-4, etc.)
 4. **Human Oversight**: Users maintain control over what the LLM sees and generates  
-5. **Enhanced Result**: The server receives an AI-generated plan with metadata
+5. **Enhanced Result**: The server receives an AI-generated architecture consultation with metadata
 
 ### Sampling Configuration
 
 ```javascript
-const samplingRequest = {
-  method: "sampling/createMessage",
-  params: {
-    messages: [/* Structured planning prompt */],
-    systemPrompt: "You are an expert project manager...",
-    includeContext: "thisServer",
-    maxTokens: 3000,
-    temperature: 0.3,
-    modelPreferences: {
-      hints: [
-        { name: "claude-3-sonnet" },
-        { name: "gpt-4" },
-        { name: "claude-3" }
-      ],
-      intelligencePriority: 0.8,
-      costPriority: 0.3,
-      speedPriority: 0.5
+const samplingResult = await server.createMessage({
+  messages: [
+    {
+      role: "user",
+      content: {
+        type: "text",
+        text: architecturePrompt
+      }
     }
-  }
-};
+  ],
+  maxTokens: 4000,
+  temperature: 0.2, // Lower temperature for consistent architectural advice
+  includeContext: "thisServer"
+});
 ```
 
 ### Fallback Behavior
 
-- ✅ **Sampling Available**: Uses AI-enhanced planning with LLM completions
-- 🔄 **Sampling Unavailable**: Falls back to template-based structured planning
-- 🛡️ **Error Handling**: Gracefully handles sampling failures with detailed logging
-- 📊 **Metadata Tracking**: Plans include generation method and model information
+- ✅ **Sampling Available**: Uses AI-enhanced architecture consultation with expert LLM guidance
+- 🔄 **Sampling Unavailable**: Falls back to detailed error responses with troubleshooting guidance
+- 🛡️ **Error Handling**: Gracefully handles sampling failures with comprehensive error information
+- 📊 **Metadata Tracking**: Consultations include generation method, model information, and analysis depth
 
 ### Testing Sampling
 
-Run the included test script to see sampling capabilities:
+Run the included validation script to test server capabilities:
 
 ```bash
-node test-sampling.js
+node validate.js
 ```
 
 ## Integration with Claude Desktop
@@ -128,7 +120,7 @@ To use this MCP server with Claude Desktop, add the following to your `claude_de
 ```json
 {
   "mcpServers": {
-    "planner": {
+    "architecture-consultant": {
       "command": "node",
       "args": ["C:\\path\\to\\P0-MCPSampling\\src\\index.js"]
     }
@@ -140,7 +132,7 @@ To use this MCP server with Claude Desktop, add the following to your `claude_de
 ```json
 {
   "mcpServers": {
-    "planner": {
+    "architecture-consultant": {
       "command": "node",
       "args": ["/path/to/P0-MCPSampling/src/index.js"]
     }
@@ -154,6 +146,7 @@ To use this MCP server with Claude Desktop, add the following to your `claude_de
 
 - `npm start` - Run the MCP server
 - `npm run dev` - Run the server (alias for start)
+- `npm test` - Run validation test
 
 ### Project Structure
 
@@ -167,24 +160,25 @@ src/
   copilot-instructions.md  # Copilot workspace instructions
 package.json        # Project configuration
 validate.js         # Server validation script
+model-sampling.md   # MCP sampling documentation and examples
 ```
 
 ## MCP Sampling Features
 
 This server demonstrates MCP sampling through:
 
-1. **Adaptive Planning**: Generates different plan structures based on input parameters
-2. **Context-Aware Responses**: Adjusts recommendations based on constraints and resources
-3. **Dynamic Content Generation**: Creates varied outputs while maintaining consistent quality
-4. **Intelligent Categorization**: Organizes plan elements into logical phases and sections
+1. **Expert Architecture Consultation**: Generates comprehensive architecture guidance based on input parameters
+2. **Context-Aware Responses**: Adjusts recommendations based on domain, complexity, and provided context
+3. **Dynamic Content Generation**: Creates varied architectural solutions while maintaining expert-level quality
+4. **Intelligent Problem Analysis**: Organizes architectural guidance into structured sections covering analysis, patterns, implementation, and best practices
 
 ## Error Handling
 
 The server includes comprehensive error handling:
-- Input validation using Zod schemas
-- Graceful error responses
+- Input validation and sanitization for security
+- Graceful error responses with detailed troubleshooting guidance
 - Process-level error handling for uncaught exceptions
-- Detailed error messages for debugging
+- Structured error messages for debugging and user guidance
 
 ## Contributing
 

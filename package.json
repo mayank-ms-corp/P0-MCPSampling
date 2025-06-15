@@ -1,9 +1,9 @@
 {
-  "name": "p0-mcpsampling",
+  "name": "architecture-mcp-server",
   "version": "1.0.0",
   "main": "src/index.js",
   "bin": {
-    "planner-mcp-server": "./src/index.js"
+    "architecture-mcp-server": "./src/index.js"
   },
   "scripts": {
     "start": "node src/index.js",
@@ -13,12 +13,13 @@
   "keywords": [
     "mcp",
     "model-context-protocol",
-    "planner",
+    "architecture",
+    "consultation",
     "sampling"
   ],
   "author": "",
   "license": "ISC",
-  "description": "An MCP server showcasing planner tool with sampling capabilities",
+  "description": "An MCP server showcasing architecture consultation tool with sampling capabilities",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.12.3",
     "zod": "^3.25.64"
