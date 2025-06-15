@@ -1,0 +1,9 @@
+{
+  "servers": {
+    "sampling-mcp-server": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["src/index.js"]
+    }
+  }
+}

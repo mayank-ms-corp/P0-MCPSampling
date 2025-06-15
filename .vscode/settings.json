@@ -1,0 +1,9 @@
+{
+    "chat.mcp.serverSampling": {
+        "P0-MCPSampling/.vscode/mcp.json: sampling-mcp-server": {
+            "allowedModels": [
+                "github.copilot-chat/o3"
+            ]
+        }
+    }
+}
